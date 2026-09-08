@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Senior SWE Interview Prep Hub</title>
+<style>
+:root {
+  --bg: #F9FAFB;
+  --panel: #FFFFFF;
+  --text: #111827;
+  --muted: #6B7280;
+  --accent: #4F46E5;
+  --accent-hover: #4338CA;
+  --border: #E5E7EB;
+  --danger: #EF4444;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; color: var(--accent-hover); }
+.wrap { max-width: 1250px; margin: auto; padding: 32px 24px; }
+.hero { padding: 40px 0; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+.eyebrow { color: var(--accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.85rem; }
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin: 16px 0; color: #111827; font-weight: 800; }
+.hero p { max-width: 800px; color: var(--muted); font-size: 1.15rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px; }
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.card h3 { margin-top: 0; font-size: 1.25rem; color: #111827; }
+.stat { font-size: 2.5rem; font-weight: 800; color: var(--text); }
+.muted { color: var(--muted); }
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+nav .inner { max-width: 1250px; margin: auto; padding: 12px 24px; display: flex; gap: 12px; overflow: auto; }
+nav a { white-space: nowrap; padding: 8px 16px; border-radius: 6px; color: var(--muted); font-weight: 500; transition: background 0.2s, color 0.2s; }
+nav a:hover { background: #F3F4F6; color: var(--text); text-decoration: none; }
+section { padding: 40px 0; }
+h2 { font-size: 2.25rem; margin: 0 0 12px; color: #111827; font-weight: 700; }
+.section-intro { color: var(--muted); max-width: 850px; font-size: 1.1rem; }
+.badge { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #F3F4F6; color: #374151; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
+.core { background: #EEF2FF; color: #4338CA; }
+.high { background: #ECFEFF; color: #0E7490; }
+.resource {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin: 12px 0;
+  transition: box-shadow 0.2s;
+}
+.resource:hover { box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.resource strong { display: block; font-size: 1.1rem; color: #111827; }
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #FFFFFF;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.btn:hover { background: var(--accent-hover); text-decoration: none; color: white; }
+details { border: 1px solid var(--border); border-radius: 12px; margin: 12px 0; background: var(--panel); }
+summary { cursor: pointer; padding: 16px; font-weight: 600; font-size: 1.1rem; color: #111827; }
+details > div { padding: 0 16px 16px; color: var(--muted); }
+.progress { height: 8px; background: #E5E7EB; border-radius: 99px; overflow: hidden; margin-top: 8px; }
+.bar { height: 100%; width: 0; background: var(--accent); transition: width 0.4s ease; }
+.checklist label { display: block; padding: 8px 0; color: #374151; cursor: pointer; border-bottom: 1px solid #F3F4F6; }
+.checklist label:last-child { border-bottom: none; }
+input[type=checkbox] { margin-right: 12px; accent-color: var(--accent); transform: scale(1.1); cursor: pointer; }
+.callout { border-left: 4px solid var(--accent); padding: 16px 20px; background: #EEF2FF; border-radius: 0 12px 12px 0; color: #374151; margin: 24px 0; }
+.callout strong { color: #111827; }
+input[type=number] {
+  width: 100%;
+  padding: 12px;
+  background: #FFFFFF;
+  color: #111827;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+input[type=number]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
+footer { padding: 48px 0; color: var(--muted); border-top: 1px solid var(--border); margin-top: 48px; text-align: center; }
+@media(max-width:650px) { .wrap { padding: 20px 16px; } .resource { flex-direction: column; align-items: flex-start; } .btn { width: 100%; text-align: center; } }
+</style>
+</head>
+<body>
+<nav><div class="inner">
+<a href="#plan">Plan</a><a href="#system">System Design</a><a href="#behavioral">Behavioral / Leadership</a><a href="#dsa">DSA</a><a href="#companies">Company Nuances</a><a href="#tracker">Tracker</a>
+</div></nav>
+<main class="wrap">
+<header class="hero">
+<div class="eyebrow">Personal Interview Preparation Hub</div>
+<h1>Senior SWE Big Tech Interview Roadmap</h1>
+<p>A focused, concurrent preparation system for Senior Software Engineer (SDE II / Senior) interviews. Heavily weighted towards System Design and Behavioral rounds using free, open-source resources.</p>
+<div class="grid">
+<div class="card"><div class="stat">35+</div><div class="muted">System designs to master</div></div>
+<div class="card"><div class="stat">10+</div><div class="muted">STAR stories prepared</div></div>
+<div class="card"><div class="stat">150</div><div class="muted">High-impact DSA patterns</div></div>
+<div class="card"><div class="stat">Concurrent</div><div class="muted">Apply and prep simultaneously</div></div>
+</div>
+</header>
+
+<section id="plan">
+<h2>1. Strategy</h2><p class="section-intro">For senior roles, the evaluation shifts from purely algorithmic "grinding" to demonstrating architectural judgment, leadership, resolving conflicts, and managing trade-offs. Prepare for these simultaneously as you apply.</p>
+<div class="grid">
+<div class="card"><span class="badge core">45%</span><h3>System Design</h3><p>The most critical differentiator. Focus on frameworks, tradeoffs, and deep dives into architectures.</p></div>
+<div class="card"><span class="badge core">30%</span><h3>Behavioral & Leadership</h3><p>Ownership, mentoring, resolving technical disagreements, and dealing with ambiguity (STAR method).</p></div>
+<div class="card"><span class="badge high">25%</span><h3>LeetCode / DSA</h3><p>Focus on clean, production-level, bug-free code. Pattern recognition is more important than volume.</p></div>
+</div>
+</section>
+
+<section id="system">
+<h2>2. System Design</h2><p class="section-intro">Learn the fundamentals using free open-source guides. Practice the standard interview framework: requirements &rarr; scale &rarr; APIs &rarr; data model &rarr; architecture &rarr; bottlenecks &rarr; reliability &rarr; tradeoffs.</p>
+<div class="resource"><div><strong>System Design Primer (GitHub)</strong><span class="muted">The gold standard open-source guide for large scale system design.</span></div><a class="btn" href="https://github.com/donnemartin/system-design-primer" target="_blank">Open Repo</a></div>
+<div class="resource"><div><strong>System Design 101 (ByteByteGo)</strong><span class="muted">Highly visual explanations of complex system design concepts.</span></div><a class="btn" href="https://github.com/ByteByteGoHq/system-design-101" target="_blank">Open Repo</a></div>
+<div class="resource"><div><strong>Awesome System Design Resources</strong><span class="muted">Curated list of free videos, articles, and architectures.</span></div><a class="btn" href="https://github.com/ashishps1/awesome-system-design-resources" target="_blank">Open Repo</a></div>
+
+<h3>Core knowledge</h3>
+<div class="grid">
+<div class="card"><h3>Networking</h3><p>HTTP/S, TCP/UDP, DNS, CDN, WebSockets, TLS, REST, gRPC.</p></div>
+<div class="card"><h3>Data</h3><p>SQL/NoSQL, indexes, ACID, isolation, replication, partitioning, sharding.</p></div>
+<div class="card"><h3>Distributed systems</h3><p>CAP, consistency, leader/follower, eventual consistency, queues, Kafka.</p></div>
+<div class="card"><h3>Reliability</h3><p>Retries, timeouts, idempotency, circuit breakers, rate limiting, backpressure, DR.</p></div>
+</div>
+
+<h3>Design Queue</h3>
+<div class="card checklist">
+<label><input type="checkbox">URL Shortener</label>
+<label><input type="checkbox">Rate Limiter</label>
+<label><input type="checkbox">Notification System</label>
+<label><input type="checkbox">Key-Value Store</label>
+<label><input type="checkbox">Twitter / News Feed</label>
+<label><input type="checkbox">Chat System (WhatsApp)</label>
+<label><input type="checkbox">YouTube / Video Streaming</label>
+<label><input type="checkbox">Proximity Service (Yelp)</label>
+<label><input type="checkbox">Search Autocomplete</label>
+<label><input type="checkbox">Distributed Message Queue</label>
+<label><input type="checkbox">Distributed Job Scheduler</label>
+<label><input type="checkbox">Payment System</label>
+</div>
+</section>
+
+<section id="behavioral">
+<h2>3. Behavioral & Leadership</h2><p class="section-intro">For senior engineers, the behavioral round is a make-or-break. Use the STAR (Situation, Task, Action, Result) format. Focus heavily on impact, mentorship, and cross-functional leadership.</p>
+<div class="resource"><div><strong>Awesome Behavioral Interviews (GitHub)</strong><span class="muted">Free curated list of resources to crack the behavioral rounds.</span></div><a class="btn" href="https://github.com/ashishps1/awesome-behavioral-interviews" target="_blank">Open Repo</a></div>
+<div class="resource"><div><strong>Tech Interview Handbook (Behavioral)</strong><span class="muted">Extensive open-source guide on how to structure your stories.</span></div><a class="btn" href="https://www.techinterviewhandbook.org/behavioral-interview/" target="_blank">Open Guide</a></div>
+
+<h3>Essential Senior Stories to Prepare</h3>
+<div class="grid">
+<div class="card checklist">
+<label><input type="checkbox">A time you mentored a junior engineer or leveled up your team.</label>
+<label><input type="checkbox">A time you had a technical disagreement and how you resolved it.</label>
+<label><input type="checkbox">A time you pushed back on product requirements due to technical debt.</label>
+<label><input type="checkbox">A project that failed or missed a deadline and what you learned.</label>
+<label><input type="checkbox">A time you took ownership of an ambiguous, undefined problem.</label>
+<label><input type="checkbox">A time you made a significant architectural trade-off.</label>
+</div>
+</div>
+</section>
+
+<section id="dsa">
+<h2>4. LeetCode / DSA</h2><p class="section-intro">Master the core patterns. At the senior level, focus on clear communication of edge cases and space/time complexities before writing bug-free code.</p>
+<div class="resource"><div><strong>Tech Interview Handbook (Grind 75)</strong><span class="muted">The modern, open-source replacement for Blind 75. Optimized for your schedule.</span></div><a class="btn" href="https://www.techinterviewhandbook.org/grind75" target="_blank">Open Tool</a></div>
+<div class="resource"><div><strong>NeetCode Roadmap</strong><span class="muted">Free structured roadmap categorized by algorithm patterns.</span></div><a class="btn" href="https://neetcode.io/roadmap" target="_blank">Open Roadmap</a></div>
+<div class="resource"><div><strong>Coding Interview University (GitHub)</strong><span class="muted">Deep-dive comprehensive CS study plan for big tech.</span></div><a class="btn" href="https://github.com/jwasham/coding-interview-university" target="_blank">Open Repo</a></div>
+
+<div class="callout"><strong>Problem-solving protocol:</strong> attempt 15–20 min &rarr; inspect only enough to unblock &rarr; close solution &rarr; reimplement &rarr; explain aloud &rarr; state complexity.</div>
+
+<h3>Topic checklist</h3>
+<div class="grid">
+<div class="card checklist">
+<label><input type="checkbox">Arrays & Hashing</label><label><input type="checkbox">Two Pointers</label><label><input type="checkbox">Sliding Window</label><label><input type="checkbox">Stack</label><label><input type="checkbox">Binary Search</label><label><input type="checkbox">Linked Lists</label>
+</div>
+<div class="card checklist">
+<label><input type="checkbox">Trees / BST</label><label><input type="checkbox">Heap / Priority Queue</label><label><input type="checkbox">Graphs / BFS / DFS</label><label><input type="checkbox">Backtracking</label><label><input type="checkbox">Greedy</label><label><input type="checkbox">Intervals</label>
+</div>
+<div class="card checklist">
+<label><input type="checkbox">1-D DP</label><label><input type="checkbox">2-D DP</label><label><input type="checkbox">Union Find</label><label><input type="checkbox">Topological Sort</label><label><input type="checkbox">Shortest Paths</label><label><input type="checkbox">Bit Manipulation</label>
+</div>
+</div>
+</section>
+
+<section id="companies">
+<h2>5. Big Tech Nuances</h2>
+<div class="grid">
+<div class="card"><span class="badge core">Meta</span><h3>Speed & Clean Code</h3><p>Expect intense pacing in DSA (2 questions in 45 min). Code must run bug-free on the first try. Behavioral is called the "Jedi" round focusing heavily on conflict resolution and taking ownership.</p></div>
+<div class="card"><span class="badge core">Google</span><h3>Fundamentals & Scale</h3><p>Deep CS fundamentals. Problems might not map directly to LeetCode patterns. "Googliness" round checks for leadership, thriving in ambiguity, and doing the right thing. Very strict hiring committee.</p></div>
+<div class="card"><span class="badge core">Microsoft</span><h3>Practicality & Architecture</h3><p>System design is highly practical. Interviewers dig deep into past technical decisions, asking "Why did you build it that way?". Process can vary significantly by team.</p></div>
+<div class="card"><span class="badge high">Atlassian</span><h3>Values & Collaboration</h3><p>Rejects "algorithm gymnastics". Expect practical coding exercises and system designs. <strong>Values interviews are heavily weighted</strong> (Open company, no b.s., play as a team). You will fail if you don't align with their culture.</p></div>
+<div class="card"><span class="badge high">Salesforce</span><h3>Enterprise & Domain</h3><p>Focuses on large-scale B2B multi-tenant architectures. Expect a mix of standard coding, deep system design, and domain-specific questions depending on the cloud (Security, Data, Core).</p></div>
+</div>
+</section>
+
+<section id="tracker">
+<h2>6. Interactive Progress Tracker</h2>
+<p class="section-intro">Counters saved in browser localStorage to track concurrent preparation progress.</p>
+<div class="grid">
+<div class="card"><h3>DSA Core Patterns</h3><input id="dsaCount" type="number" min="0" max="150" value="0"><p><span id="dsaPct">0%</span> of 150 target</p><div class="progress"><div id="dsaBar" class="bar"></div></div></div>
+<div class="card"><h3>System Designs</h3><input id="sdCount" type="number" min="0" max="35" value="0"><p><span id="sdPct">0%</span> of 35 target</p><div class="progress"><div id="sdBar" class="bar"></div></div></div>
+<div class="card"><h3>Mock Interviews</h3><input id="mockCount" type="number" min="0" max="15" value="0"><p><span id="mockPct">0%</span> of 15 target</p><div class="progress"><div id="mockBar" class="bar"></div></div></div>
+</div>
+<h3>Interview Readiness Checklist</h3>
+<div class="card checklist">
+<label><input type="checkbox" data-save="star">10+ STAR stories written and rehearsed</label>
+<label><input type="checkbox" data-save="sd_framework">System Design template/framework memorized</label>
+<label><input type="checkbox" data-save="dsa_mocks">5 Timed DSA mocks completed</label>
+<label><input type="checkbox" data-save="sd_mocks">5 System Design mocks completed</label>
+<label><input type="checkbox" data-save="resume">Resume tailored for Senior impact</label>
+</div>
+</section>
+
+<footer>
+<p><strong>Built as a personal Senior SWE interview preparation dashboard.</strong></p>
+<p>External links are provided as free, open-source study resources. Best of luck on your concurrent application and preparation journey.</p>
+</footer>
+</main>
+
+<script>
+const keys=['dsaCount','sdCount','mockCount'];
+const targets={dsaCount:150,sdCount:35,mockCount:15};
+function save(id){localStorage.setItem('prep_'+id,document.getElementById(id).value);update(id)}
+function update(id){let v=Number(document.getElementById(id).value)||0,t=targets[id],p=Math.min(100,Math.round(v/t*100));document.getElementById(id.replace('Count','Pct')).textContent=p+'%';document.getElementById(id.replace('Count','Bar')).style.width=p+'%';}
+keys.forEach(id=>{let v=localStorage.getItem('prep_'+id);if(v!==null)document.getElementById(id).value=v;document.getElementById(id).addEventListener('input',()=>save(id));update(id)});
+document.querySelectorAll('input[type=checkbox][data-save]').forEach((x)=>{let k='prep_'+x.dataset.save;x.checked=localStorage.getItem(k)==='1';x.addEventListener('change',()=>localStorage.setItem(k,x.checked?'1':'0'))});
+</script>
+</body>
+</html>
