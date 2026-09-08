@@ -1,3 +1,17 @@
+# SWE Interview Preparation Hub
+
+A focused, concurrent preparation system for Senior Software Engineer (SDE II / Senior) interviews. Heavily weighted towards System Design and Behavioral rounds using free, open-source resources.
+
+## Features
+- **Concurrent Strategy:** Track your progress in Data Structures, System Design, and Behavioral rounds all at once.
+- **Big Tech Specifics:** Quick reference for what Meta, Google, Microsoft, Atlassian, and Salesforce look for.
+- **Interactive Tracker:** Built-in tracker using `localStorage` to save your progress across sessions.
+
+## Publishing
+This hub is designed to be hosted via GitHub Pages for easy access from anywhere. By naming the file `index.html`, it is automatically served as the root page.
+
+## License
+
 MIT License
 
 Copyright (c) 2026 Lovelesh 
